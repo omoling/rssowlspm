@@ -1,0 +1,1317 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+<plugin>
+   <extension-point id="EntityPropertyPage" name="Entity Property Page" schema="schema/EntityPropertyPage.exsd"/>
+   <extension-point id="KeywordFeed" name="Keyword Feed" schema="schema/KeywordFeed.exsd"/>
+
+   <extension
+         id="rssowl"
+         point="org.eclipse.core.runtime.applications">
+      <application>
+         <run
+               class="org.rssowl.ui.internal.Application">
+         </run>
+      </application>
+   </extension>
+   <extension
+         point="org.eclipse.ui.perspectives">
+      <perspective
+            class="org.rssowl.ui.internal.Perspective"
+            icon="icons/product/16x16.gif"
+            id="org.rssowl.ui.perspective"
+            name="RSSOwl">
+      </perspective>
+   </extension>
+   <extension
+         point="org.eclipse.ui.actionSets">
+      <actionSet
+            id="org.rssowl.ui.fileSet"
+            label="File"
+            visible="true">
+         <action
+               class="org.rssowl.ui.internal.actions.NewTypeDropdownAction"
+               icon="icons/etool16/add.gif"
+               id="org.rssowl.ui.NewType"
+               label="New"
+               style="pulldown"
+               toolbarPath="file"
+               tooltip="New">
+         </action>
+         <action
+               class="org.rssowl.ui.internal.actions.NewBookMarkAction"
+               definitionId="org.rssowl.ui.actions.NewBookMark"
+               icon="icons/obj16/bookmark.gif"
+               id="org.rssowl.ui.actions.NewBookMark"
+               label="Bookmark..."
+               menubarPath="file/new_sub/bookmark"
+               style="push">
+         </action>
+         <action
+               class="org.rssowl.ui.internal.actions.NewNewsBinAction"
+               definitionId="org.rssowl.ui.actions.NewNewsBin"
+               icon="icons/obj16/newsbin.gif"
+               id="org.rssowl.ui.actions.NewNewsBin"
+               label="News Bin..."
+               menubarPath="file/new_sub/newsbin"
+               style="push">
+         </action>
+         <action
+               class="org.rssowl.ui.internal.actions.NewSearchMarkAction"
+               definitionId="org.rssowl.ui.actions.NewSearchMark"
+               icon="icons/obj16/searchmark.gif"
+               id="org.rssowl.ui.actions.NewSearchMark"
+               label="Saved Search..."
+               menubarPath="file/new_sub/searchmark"
+               style="push">
+         </action>
+         <action
+               class="org.rssowl.ui.internal.actions.NewFolderAction"
+               definitionId="org.rssowl.ui.actions.NewFolder"
+               icon="icons/obj16/folder.gif"
+               id="org.rssowl.ui.actions.NewFolder"
+               label="Folder..."
+               menubarPath="file/new_sub/folder"
+               style="push">
+         </action>
+         <action
+               class="org.rssowl.ui.internal.actions.ExportFeedsAction"
+               definitionId="org.rssowl.ui.actions.ExportFeeds"
+               icon="icons/etool16/export.gif"
+               id="org.rssowl.ui.actions.ExportFeeds"
+               label="&amp;Export Feeds..."
+               menubarPath="file/additions"
+               style="push"
+               tooltip="Export Feeds to an OPML source"/>
+         <action
+               class="org.rssowl.ui.internal.actions.ImportFeedsAction"
+               definitionId="org.rssowl.ui.actions.ImportFeeds"
+               icon="icons/etool16/import.gif"
+               id="org.rssowl.ui.actions.ImportFeeds"
+               label="&amp;Import Feeds..."
+               menubarPath="file/additions"
+               style="push"
+               tooltip="Import Feeds from an OPML source"/>
+         <menu
+               id="new_sub"
+               label="&amp;New"
+               path="file/new.ext">
+            <groupMarker
+                  name="bookmark" />
+            <groupMarker
+                  name="newsbin">
+            </groupMarker>
+            <groupMarker
+                  name="searchmark">
+            </groupMarker>
+            <separator
+                  name="folder">
+            </separator>
+         </menu>
+      </actionSet>
+      <actionSet
+            id="org.rssowl.ui.editSet"
+            label="Edit"
+            visible="true">
+         <action
+               class="org.rssowl.ui.internal.actions.SearchNewsAction"
+               definitionId="org.rssowl.ui.SearchNewsAction"
+               icon="icons/obj16/searchmark.gif"
+               id="org.rssowl.ui.SearchNewsAction"
+               label="Search News..."
+               style="push"
+               toolbarPath="search">
+         </action>
+      </actionSet>
+      <actionSet
+            id="org.rssowl.ui.goSet"
+            label="Go"
+            visible="true">
+         <menu
+               id="previous"
+               label="&amp;Previous"
+               path="navigate/previous.ext">
+            <separator
+                  name="previous.news">
+            </separator>
+            <separator
+                  name="previous.feed">
+            </separator>
+         </menu>
+         <menu
+               id="next"
+               label="&amp;Next"
+               path="navigate/next.ext">
+            <separator
+                  name="next.news">
+            </separator>
+            <separator
+                  name="next.feed">
+            </separator>
+         </menu>
+         <action
+               class="org.rssowl.ui.internal.actions.NavigationActionFactory:nextUnreadNews"
+               definitionId="org.rssowl.ui.NextUnreadNews"
+               id="org.rssowl.ui.NextUnreadNews"
+               label="Next Unread News"
+               menubarPath="navigate/next/next.news"
+               style="push">
+         </action>
+         <action
+               class="org.rssowl.ui.internal.actions.NavigationActionFactory:nextNews"
+               definitionId="org.rssowl.ui.NextNews"
+               id="org.rssowl.ui.NextNews"
+               label="Next News"
+               menubarPath="navigate/next/next.news"
+               style="push">
+         </action>
+         <action
+               class="org.rssowl.ui.internal.actions.NavigationActionFactory:nextUnreadFeed"
+               definitionId="org.rssowl.ui.NextUnreadFeed"
+               id="org.rssowl.ui.NextUnreadFeed"
+               label="Next Feed with Unread News"
+               menubarPath="navigate/next/next.feed"
+               style="push">
+         </action>
+         <action
+               class="org.rssowl.ui.internal.actions.NavigationActionFactory:nextFeed"
+               definitionId="org.rssowl.ui.NextFeed"
+               id="org.rssowl.ui.NextFeed"
+               label="Next Feed"
+               menubarPath="navigate/next/next.feed"
+               style="push">
+         </action>
+         <action
+               class="org.rssowl.ui.internal.actions.NavigationActionFactory:previousUnreadNews"
+               definitionId="org.rssowl.ui.PreviousUnreadNews"
+               id="org.rssowl.ui.PreviousUnreadNews"
+               label="Previous Unread News"
+               menubarPath="navigate/previous/previous.news"
+               style="push">
+         </action>
+         <action
+               class="org.rssowl.ui.internal.actions.NavigationActionFactory:previousNews"
+               definitionId="org.rssowl.ui.PreviousNews"
+               id="org.rssowl.ui.PreviousNews"
+               label="Previous News"
+               menubarPath="navigate/previous/previous.news"
+               style="push">
+         </action>
+         <action
+               class="org.rssowl.ui.internal.actions.NavigationActionFactory:previousUnreadFeed"
+               definitionId="org.rssowl.ui.PreviousUnreadFeed"
+               id="org.rssowl.ui.PreviousUnreadFeed"
+               label="Previous Feed with Unread News"
+               menubarPath="navigate/previous/previous.feed"
+               style="push">
+         </action>
+         <action
+               class="org.rssowl.ui.internal.actions.NavigationActionFactory:previousFeed"
+               definitionId="org.rssowl.ui.PreviousFeed"
+               id="org.rssowl.ui.PreviousFeed"
+               label="Previous Feed"
+               menubarPath="navigate/previous/previous.feed"
+               style="push">
+         </action>
+      </actionSet>
+      <actionSet
+            id="org.rssowl.ui.ManageExtensions"
+            label="Manage Extensions"
+            visible="true">
+         <action
+               class="org.rssowl.ui.internal.actions.FindUpdatesAction"
+               definitionId="org.rssowl.ui.actions.FindUpdates"
+               icon="icons/elcl16/updates.gif"
+               id="org.rssowl.ui.actions.FindUpdates"
+               label="&amp;Check for Updates"
+               menubarPath="help/helpEnd"
+               style="push"
+               toolbarPath="update"
+               tooltip="Find Updates for installed Extensions">
+         </action>
+         <action
+               class="org.rssowl.ui.internal.actions.FindExtensionsAction"
+               definitionId="org.rssowl.ui.actions.FindExtensions"
+               icon="icons/elcl16/usearch_obj.gif"
+               id="org.rssowl.ui.actions.FindExtensions"
+               label="&amp;Get More Extensions"
+               menubarPath="tools/extensions/findExtensions"
+               style="push"
+               toolbarPath="update"
+               tooltip="Get More Extensions"/>
+         <action
+               class="org.rssowl.ui.internal.actions.ManageConfigurationAction"
+               definitionId="org.rssowl.ui.actions.ManageConfiguration"
+               icon="icons/elcl16/configs.gif"
+               id="org.rssowl.ui.actions.ManageConfiguration"
+               label="&amp;Manage Extensions"
+               menubarPath="tools/extensions/manageConfiguration"
+               style="push"
+               tooltip="Manage Extensions"/>
+         <menu
+               id="extensions"
+               label="&amp;Extensions"
+               path="tools/additions">
+            <separator name="extensionsBegin"/>
+            <groupMarker name="findExtensions"/>
+            <separator name="extensionsEnd"/>
+            <groupMarker name="manageConfiguration"/>
+         </menu>
+      </actionSet>
+      <actionSet
+            id="org.rssowl.ui.NewsSet"
+            label="News"
+            visible="true">
+         <action
+               class="org.rssowl.ui.internal.actions.MarkAllNewsReadAction"
+               definitionId="org.rssowl.ui.MarkAllRead"
+               disabledIcon="icons/dlcl16/mark_all_read.gif"
+               icon="icons/elcl16/mark_all_read.gif"
+               id="org.rssowl.ui.MarkAllRead"
+               label="Mark All News as Read"
+               style="push"
+               toolbarPath="news/mark">
+         </action>
+         <action
+               class="org.rssowl.ui.internal.actions.ToggleReadStateAction"
+               definitionId="org.rssowl.ui.actions.MarkRead"
+               disabledIcon="icons/dlcl16/mark_read.gif"
+               enablesFor="+"
+               icon="icons/elcl16/mark_read.gif"
+               id="org.rssowl.ui.actions.MarkRead"
+               label="Mark News as Read"
+               style="push"
+               toolbarPath="news/mark"
+               tooltip="Mark News as Read">
+            <enablement>
+               <or>
+                  <objectClass
+                        name="org.rssowl.core.persist.INews">
+                  </objectClass>
+                  <objectClass
+                        name="org.rssowl.ui.internal.EntityGroup">
+                  </objectClass>
+               </or>
+            </enablement>
+         </action>
+         <action
+               class="org.rssowl.ui.internal.actions.ReloadAllAction"
+               definitionId="org.rssowl.ui.actions.ReloadAll"
+               icon="icons/elcl16/reload_all.gif"
+               id="org.rssowl.ui.actions.ReloadAll"
+               label="Update All"
+               style="push"
+               toolbarPath="news/reload"/>
+         <action
+               definitionId="org.rssowl.ui.actions.Reload"
+               disabledIcon="icons/dlcl16/reload.gif"
+               icon="icons/elcl16/reload.gif"
+               id="org.rssowl.ui.actions.Reload"
+               label="Update"
+               retarget="true"
+               style="push"
+               toolbarPath="news/reload"/>
+         <menu
+               id="news"
+               label="News">
+            <separator name="mark"/>
+            <separator name="reload"/>
+            <separator name="additions"/>
+         </menu>
+      </actionSet>
+      <actionSet
+            id="org.rssowl.ui.CleanUpSet"
+            label="Clean Up"
+            visible="true">
+         <action
+               class="org.rssowl.ui.internal.actions.CleanUpAction"
+               definitionId="org.rssowl.ui.CleanUpAction"
+               id="org.rssowl.ui.CleanUpAction"
+               label="Clean Up..."
+               menubarPath="tools/begin">
+         </action>
+      </actionSet>
+   </extension>
+   <extension
+         point="org.eclipse.ui.views">
+      <!--<view
+            allowMultiple="false"
+            category="org.eclipse.ui"
+            class="org.eclipse.ui.ExtensionFactory:progressView"
+            fastViewWidthRatio="0.5"
+            icon="icons/eview16/pview.gif"
+            id="org.eclipse.ui.views.ProgressView"
+            name="Progress"/>
+      <category
+            id="org.rssowl.ui.category"
+            name="RSSOwl"/>-->
+      <view
+            allowMultiple="false"
+            category="org.rssowl.ui.category"
+            class="org.rssowl.ui.internal.views.explorer.BookMarkExplorer"
+            icon="icons/eview16/bkmrk_explorer.gif"
+            id="org.rssowl.ui.BookMarkExplorer"
+            name="Bookmarks"/>
+      <category
+            id="org.rssowl.ui.category"
+            name="RSSOwl">
+      </category>
+      <view
+            category="org.rssowl.ui.category"
+            class="org.rssowl.ui.internal.views.label.LabelsExplorer"
+            icon="icons/eview16/label.gif"
+            id="org.rssowl.ui.LabelsExplorer"
+            name="Labels">
+      </view>
+      <view
+            category="org.rssowl.ui.category"
+            class="org.rssowl.ui.internal.views.statistics.StatisticsExplorer"
+            icon="icons/eview16/feedview.gif"
+            id="org.rssowl.ui.StatisticsExplorer"
+            name="Statistics">
+      </view>
+   </extension>
+   <extension
+         point="org.eclipse.ui.preferencePages">
+      <page
+            class="org.eclipse.ui.ExtensionFactory:workbenchPreferencePage"
+            id="org.eclipse.ui.preferencePages.Workbench"
+            name="General">
+         <keywordReference id="org.rssowl.ui.preferences.keywords.General"/>
+      </page>
+      <page
+            category="org.eclipse.ui.preferencePages.Workbench"
+            class="org.eclipse.ui.ExtensionFactory:newKeysPreferencePage"
+            id="org.rssowl.ui.preferences.Keys"
+            name="Keys">
+         <keywordReference id="org.rssowl.ui.preferences.keywords.Keys"/>
+      </page>
+      <page
+            category="org.eclipse.ui.preferencePages.Workbench"
+            class="org.eclipse.ui.ExtensionFactory:appearancePreferencePage"
+            id="org.rssowl.ui.preferences.Appearance"
+            name="Appearance">
+         <keywordReference id="org.rssowl.ui.preferences.keywords.Appearance"/>
+      </page>
+      <page
+            category="org.eclipse.ui.preferencePages.Workbench"
+            class="org.eclipse.ui.ExtensionFactory:colorsAndFontsPreferencePage"
+            id="org.rssowl.ui.preferences.ColorsAndFonts"
+            name="Colors and Fonts">
+         <keywordReference id="org.rssowl.ui.preferences.keywords.ColorsAndFonts"/>
+      </page>
+      <page
+            class="org.rssowl.ui.internal.FeedsPreferencePage"
+            id="org.rssowl.ui.FeedsPreferences"
+            name="Feeds">
+         <keywordReference
+               id="org.rssowl.ui.preferences.keywords.Feeds">
+         </keywordReference>
+      </page>
+      <page
+            class="org.rssowl.ui.internal.MiscPreferencePage"
+            id="org.rssowl.ui.MiscPreferences"
+            name="Miscellaneous">
+         <keywordReference
+               id="org.rssowl.ui.preferences.keywords.Miscellaneous">
+         </keywordReference>
+      </page>
+      <page
+            class="org.rssowl.ui.internal.ManageLabelsPreferencePage"
+            id="org.rssowl.ui.ManageLabels"
+            name="Organize Labels">
+         <keywordReference
+               id="org.rssowl.ui.preferences.keywords.ManageLabels">
+         </keywordReference>
+      </page>
+      <page
+            class="org.rssowl.ui.internal.notifier.NotifierPreferencesPage"
+            id="org.rssowl.ui.NotifierPreferences"
+            name="Notifier">
+         <keywordReference
+               id="org.rssowl.ui.preferences.keywords.Notifier">
+         </keywordReference>
+      </page>
+      <page
+            class="org.rssowl.ui.internal.CredentialsPreferencesPage"
+            id="org.rssowl.ui.CredentialsPreferences"
+            name="Passwords">
+         <keywordReference
+               id="org.rssowl.ui.preferences.keywords.Credentials">
+         </keywordReference>
+      </page>
+   </extension>
+   <extension
+         point="org.eclipse.ui.keywords">
+      <keyword
+            id="org.rssowl.ui.preferences.keywords.General"
+            label="click background heap double single"/>
+      <keyword
+            id="org.rssowl.ui.preferences.keywords.Keys"
+            label="binding command scheme hotkey accelerator"/>
+      <keyword
+            id="org.rssowl.ui.preferences.keywords.Appearance"
+            label="presentation theme position animation style"/>
+      <keyword
+            id="org.rssowl.ui.preferences.keywords.ColorsAndFonts"
+            label="presentation theme style"/>
+      <keyword
+            id="org.rssowl.ui.preferences.keywords.Perspectives"
+            label="open view switch"/>
+      <keyword
+            id="org.rssowl.ui.preferences.keywords.Miscellaneous"
+            label="internal embedded systemtray confirm confirmation delete reopen open single multi tabs minimize tray external browser feed view ">
+      </keyword>
+      <keyword
+            id="org.rssowl.ui.preferences.keywords.Feeds"
+            label="update reload display startup start-up auto automatic clean clean-up retention delete age maximum">
+      </keyword>
+      <keyword
+            id="org.rssowl.ui.preferences.keywords.ManageLabels"
+            label="label labels tag tags organize categorize category prioritize priority">
+      </keyword>
+      <keyword
+            id="org.rssowl.ui.preferences.keywords.Notifier"
+            label="notifier notification alert popup fade animate info notify">
+      </keyword>
+      <keyword
+            id="org.rssowl.ui.preferences.keywords.Credentials"
+            label="password passwords credential credentials protected secure security username login master protect authorization authentication auth">
+      </keyword>
+   </extension>
+   <extension
+         point="org.eclipse.ui.commands">
+      <category
+            description="RSSOwl Commands"
+            id="org.rssowl.ui.commands.category.RSSOwl"
+            name="RSSOwl"/>
+      <category
+            description="Manage Extensions"
+            id="org.rssowl.ui.commands.category.Extensions"
+            name="Extensions"/>
+      <command
+            categoryId="org.rssowl.ui.commands.category.Extensions"
+            id="org.rssowl.ui.actions.FindUpdates"
+            name="Check for Updates"/>
+      <command
+            categoryId="org.rssowl.ui.commands.category.Extensions"
+            id="org.rssowl.ui.actions.FindExtensions"
+            name="Get More Extensions"/>
+      <command
+            categoryId="org.rssowl.ui.commands.category.Extensions"
+            id="org.rssowl.ui.actions.ManageConfiguration"
+            name="Manage Configuration"/>
+      <command
+            categoryId="org.rssowl.ui.commands.category.RSSOwl"
+            description="Reloads the current active View or Editor."
+            id="org.rssowl.ui.actions.Reload"
+            name="Update"/>
+      <command
+            categoryId="org.rssowl.ui.commands.category.RSSOwl"
+            description="Reloads all BookMarks."
+            id="org.rssowl.ui.actions.ReloadAll"
+            name="Update All"/>
+      <command
+            categoryId="org.rssowl.ui.commands.category.RSSOwl"
+            defaultHandler="org.rssowl.ui.internal.handler.MarkReadHandler"
+            description="Mark selected News as Read"
+            id="org.rssowl.ui.actions.MarkRead"
+            name="Mark Read"/>
+      <command
+            categoryId="org.rssowl.ui.commands.category.RSSOwl"
+            description="Mark all News of the currently displayed Feed as Read"
+            id="org.rssowl.ui.MarkAllRead"
+            name="Mark All Read"/>
+      <command
+            categoryId="org.rssowl.ui.commands.category.RSSOwl"
+            defaultHandler="org.rssowl.ui.internal.handler.MarkStickyHandler"
+            description="Mark selected News as Sticky"
+            id="org.rssowl.ui.actions.MarkSticky"
+            name="Mark Sticky"/>
+      <command
+            categoryId="org.rssowl.ui.commands.category.RSSOwl"
+            description="Create a new BookMark"
+            id="org.rssowl.ui.actions.NewBookMark"
+            name="New BookMark">
+      </command>
+      <command
+            categoryId="org.rssowl.ui.commands.category.RSSOwl"
+            description="Create a new Saved Search"
+            id="org.rssowl.ui.actions.NewSearchMark"
+            name="New Saved Search">
+      </command>
+      <command
+            categoryId="org.rssowl.ui.commands.category.RSSOwl"
+            description="Create a new News Bin"
+            id="org.rssowl.ui.actions.NewNewsBin"
+            name="New News Bin">
+      </command>
+      <command
+            categoryId="org.rssowl.ui.commands.category.RSSOwl"
+            description="Create a new Folder"
+            id="org.rssowl.ui.actions.NewFolder"
+            name="New Folder">
+      </command>
+      <command
+            categoryId="org.rssowl.ui.commands.category.RSSOwl"
+            id="org.rssowl.ui.FindAction"
+            name="Find">
+      </command>
+      <command
+            categoryId="org.rssowl.ui.commands.category.RSSOwl"
+            id="org.rssowl.ui.NextUnreadNews"
+            name="Next Unread News">
+      </command>
+      <command
+            categoryId="org.rssowl.ui.commands.category.RSSOwl"
+            id="org.rssowl.ui.NextNews"
+            name="Next News">
+      </command>
+      <command
+            categoryId="org.rssowl.ui.commands.category.RSSOwl"
+            id="org.rssowl.ui.PreviousUnreadNews"
+            name="Previous Unread News">
+      </command>
+      <command
+            categoryId="org.rssowl.ui.commands.category.RSSOwl"
+            id="org.rssowl.ui.PreviousNews"
+            name="Previous News">
+      </command>
+      <command
+            categoryId="org.rssowl.ui.commands.category.RSSOwl"
+            id="org.rssowl.ui.NextUnreadFeed"
+            name="Next Feed with Unread News">
+      </command>
+      <command
+            categoryId="org.rssowl.ui.commands.category.RSSOwl"
+            id="org.rssowl.ui.NextFeed"
+            name="Next Feed">
+      </command>
+      <command
+            categoryId="org.rssowl.ui.commands.category.RSSOwl"
+            id="org.rssowl.ui.PreviousUnreadFeed"
+            name="Previous Feed with Unread News">
+      </command>
+      <command
+            categoryId="org.rssowl.ui.commands.category.RSSOwl"
+            id="org.rssowl.ui.PreviousFeed"
+            name="Previous Feed">
+      </command>
+      <command
+            categoryId="org.rssowl.ui.commands.category.RSSOwl"
+            id="org.rssowl.ui.SearchNewsAction"
+            name="Search News">
+      </command>
+      <command
+            categoryId="org.rssowl.ui.commands.category.RSSOwl"
+            id="org.rssowl.ui.actions.ExportFeeds"
+            name="Export Feeds">
+      </command>
+      <command
+            categoryId="org.rssowl.ui.commands.category.RSSOwl"
+            id="org.rssowl.ui.actions.ImportFeeds"
+            name="Import Feeds">
+      </command>
+      <command
+            categoryId="org.rssowl.ui.commands.category.RSSOwl"
+            id="org.rssowl.ui.CleanUpAction"
+            name="Clean Up">
+      </command>
+      <command
+            categoryId="org.rssowl.ui.commands.category.RSSOwl"
+            id="org.rssowl.ui.SendLinkAction"
+            name="Send Link">
+      </command>
+      <command
+            categoryId="org.rssowl.ui.commands.category.RSSOwl"
+            id="org.rssowl.ui.CopyLinkAction"
+            name="Copy Link">
+      </command>
+      <command
+            categoryId="org.rssowl.ui.commands.category.RSSOwl"
+            id="org.rssowl.ui.OpenInExternalBrowser"
+            name="Open in Browser">
+      </command>
+      <command
+            categoryId="org.rssowl.ui.commands.category.RSSOwl"
+            id="org.rssowl.ui.SortByNameAction"
+            name="Sort by Name">
+      </command>
+      <command
+            categoryId="org.rssowl.ui.commands.category.RSSOwl"
+            defaultHandler="org.rssowl.ui.internal.handler.UndoRedoHandler"
+            description="Undo the last operation"
+            id="org.rssowl.ui.UndoAction"
+            name="Undo">
+      </command>
+      <command
+            categoryId="org.rssowl.ui.commands.category.RSSOwl"
+            defaultHandler="org.rssowl.ui.internal.handler.UndoRedoHandler"
+            description="Redo the last operation"
+            id="org.rssowl.ui.RedoAction"
+            name="Redo">
+      </command>
+      <command
+            categoryId="org.rssowl.ui.commands.category.RSSOwl"
+            defaultHandler="org.rssowl.ui.internal.handler.ToggleReadStateHandler"
+            description="Toggle Read State of selected News"
+            id="org.rssowl.ui.ToggleReadState"
+            name="Toggle Read State">
+      </command>
+      <command
+            categoryId="org.rssowl.ui.commands.category.RSSOwl"
+            description="Aggregate all feeds of the selected folder."
+            id="org.rssowl.ui.AggregateFolderAction"
+            name="Aggregate Feeds">
+      </command>
+      <command
+            categoryId="org.rssowl.ui.commands.category.RSSOwl"
+            defaultHandler="org.rssowl.ui.internal.handler.ToggleFullScreenHandler"
+            description="Toggle Full Screen"
+            id="org.rssowl.ui.FullScreenCommand"
+            name="Toggle Full Screen">
+      </command>
+      <command
+            categoryId="org.rssowl.ui.commands.category.RSSOwl"
+            defaultHandler="org.rssowl.ui.internal.handler.NextBookmarkSetHandler"
+            description="Navigate to the next Bookmark-Set"
+            id="org.rssowl.ui.NextBookmarkSetCommand"
+            name="Next Bookmark-Set">
+      </command>
+      <command
+            categoryId="org.rssowl.ui.commands.category.RSSOwl"
+            defaultHandler="org.rssowl.ui.internal.handler.PreviousBookmarkSetHandler"
+            description="Navigate to the previous Bookmark-Set"
+            id="org.rssowl.ui.PreviousBookmarkSetCommand"
+            name="Previous Bookmark-Set">
+      </command>
+   </extension>
+   <extension
+         id="product"
+         point="org.eclipse.core.runtime.products">
+      <product
+            application="org.rssowl.ui.rssowl"
+            name="RSSOwl">
+         <property
+               name="aboutImage"
+               value="icons/product/about.gif"/>
+         <property
+               name="windowImages"
+               value="icons/product/16x16.gif,icons/product/32x32.gif,icons/product/48x48.gif,icons/product/64x64.gif,icons/product/128x128.gif"/>
+         <property
+               name="aboutText"
+               value="RSSOwl 2.0&#x0A;&#x0A;Version: 2.0.0&#x0A;Build id: Milestone 9 (Nightly)&#x0A;&#x0A;(c) Copyright RSSOwl contributors and others 2005, 2008.  All rights reserved.&#x0A;Visit http://www.rssowl.org"/>
+         <property
+               name="preferenceCustomization"
+               value="preferences.ini"/>
+         <property
+               name="appName"
+               value="RSSOwl">
+         </property>
+      </product>
+   </extension>
+   <extension
+         point="org.eclipse.ui.bindings">
+      <scheme
+            description="This is the RSSOwl Keys Scheme"
+            id="org.rssowl.ui.KeyScheme"
+            name="RSSOwl Keys"/>
+      <key
+            commandId="org.eclipse.ui.file.close"
+            contextId="org.eclipse.ui.contexts.window"
+            schemeId="org.rssowl.ui.KeyScheme"
+            sequence="M1+W"/>
+      <key
+            commandId="org.eclipse.ui.file.closeAll"
+            contextId="org.eclipse.ui.contexts.window"
+            schemeId="org.rssowl.ui.KeyScheme"
+            sequence="M1+M2+W"/>
+      <key
+            commandId="org.rssowl.ui.actions.Reload"
+            contextId="org.eclipse.ui.contexts.window"
+            schemeId="org.rssowl.ui.KeyScheme"
+            sequence="M1+U"/>
+      <key
+            commandId="org.rssowl.ui.actions.ReloadAll"
+            contextId="org.eclipse.ui.contexts.window"
+            schemeId="org.rssowl.ui.KeyScheme"
+            sequence="M1+M2+U"/>
+      <key
+            commandId="org.eclipse.ui.edit.selectAll"
+            contextId="org.eclipse.ui.contexts.dialogAndWindow"
+            schemeId="org.rssowl.ui.KeyScheme"
+            sequence="M1+A"/>
+      <key
+            commandId="org.eclipse.ui.edit.delete"
+            contextId="org.eclipse.ui.contexts.dialogAndWindow"
+            schemeId="org.rssowl.ui.KeyScheme"
+            sequence="DEL"/>
+      <key
+            commandId="org.rssowl.ui.MarkAllRead"
+            contextId="org.eclipse.ui.contexts.window"
+            schemeId="org.rssowl.ui.KeyScheme"
+            sequence="M1+M2+C"/>
+      <key
+            commandId="org.eclipse.ui.file.properties"
+            contextId="org.eclipse.ui.contexts.window"
+            schemeId="org.rssowl.ui.KeyScheme"
+            sequence="M3+Enter">
+      </key>
+      <key
+            commandId="org.rssowl.ui.FindAction"
+            contextId="org.eclipse.ui.contexts.window"
+            schemeId="org.rssowl.ui.KeyScheme"
+            sequence="M1+F">
+      </key>
+      <key
+            commandId="org.rssowl.ui.NextUnreadNews"
+            contextId="org.eclipse.ui.contexts.window"
+            schemeId="org.rssowl.ui.KeyScheme"
+            sequence="M1+SPACE">
+      </key>
+      <key
+            commandId="org.rssowl.ui.NextUnreadFeed"
+            contextId="org.eclipse.ui.contexts.window"
+            schemeId="org.rssowl.ui.KeyScheme"
+            sequence="M1+M2+SPACE">
+      </key>
+      <key
+            commandId="org.rssowl.ui.SearchNewsAction"
+            contextId="org.eclipse.ui.contexts.window"
+            schemeId="org.rssowl.ui.KeyScheme"
+            sequence="M1+M2+F">
+      </key>
+      <key
+            commandId="org.rssowl.ui.UndoAction"
+            contextId="org.eclipse.ui.contexts.window"
+            schemeId="org.rssowl.ui.KeyScheme"
+            sequence="M1+Z">
+      </key>
+      <key
+            commandId="org.rssowl.ui.RedoAction"
+            contextId="org.eclipse.ui.contexts.window"
+            schemeId="org.rssowl.ui.KeyScheme"
+            sequence="M1+Y">
+      </key>
+      <key
+            commandId="org.rssowl.ui.FullScreenCommand"
+            contextId="org.eclipse.ui.contexts.window"
+            schemeId="org.rssowl.ui.KeyScheme"
+            sequence="F11">
+      </key>
+   </extension>
+   <extension
+         point="org.eclipse.ui.popupMenus">
+      <objectContribution
+            adaptable="false"
+            id="org.rssowl.ui.MarkReadContribution"
+            objectClass="java.lang.Object">
+         <action
+               class="org.rssowl.ui.internal.actions.MarkTypesReadAction"
+               definitionId="org.rssowl.ui.actions.MarkRead"
+               enablesFor="+"
+               icon="icons/elcl16/mark_read.gif"
+               id="org.rssowl.ui.actions.MarkRead"
+               label="&amp;Mark Read"
+               menubarPath="mark"
+               style="push"
+               tooltip="Mark selected News as Read"/>
+         <visibility>
+            <or>
+               <objectClass name="org.rssowl.core.persist.IMark"/>
+               <objectClass
+                     name="org.rssowl.core.persist.IFolder">
+               </objectClass>
+               <objectState
+                     name="entity.group.category"
+                     value="org.rssowl.ui.internal.views.explorer.BookMarkGrouping">
+               </objectState>
+            </or>
+         </visibility>
+      </objectContribution>
+      <objectContribution
+            adaptable="false"
+            id="org.rssowl.ui.DeleteContribution"
+            objectClass="java.lang.Object">
+         <action
+               class="org.rssowl.ui.internal.actions.DeleteTypesAction"
+               definitionId="org.eclipse.ui.edit.delete"
+               enablesFor="+"
+               icon="icons/elcl16/remove.gif"
+               id="org.eclipse.ui.edit.delete"
+               label="&amp;Delete"
+               menubarPath="edit">
+         </action>
+         <visibility>
+            <or>
+               <objectClass name="org.rssowl.core.persist.IMark"/>
+               <objectClass
+                     name="org.rssowl.core.persist.IFolder">
+               </objectClass>
+               <objectClass
+                     name="org.rssowl.core.persist.INews">
+               </objectClass>
+               <objectState
+                     name="entity.group.category"
+                     value="org.rssowl.ui.internal.editors.feed.NewsGrouping">
+               </objectState>
+               <objectState
+                     name="entity.group.category"
+                     value="org.rssowl.ui.internal.views.explorer.BookMarkGrouping">
+               </objectState>
+            </or>
+         </visibility>
+      </objectContribution>
+      <objectContribution
+            adaptable="false"
+            id="org.rssowl.ui.SortByNameContribution"
+            objectClass="java.lang.Object">
+         <action
+               class="org.rssowl.ui.internal.actions.SortByNameAction"
+               definitionId="org.rssowl.ui.SortByNameAction"
+               enablesFor="+"
+               id="org.rssowl.ui.SortByNameAction"
+               label="&amp;Sort by Name"
+               menubarPath="edit">
+         </action>
+         <visibility>
+            <objectClass
+                  name="org.rssowl.core.persist.IFolder">
+            </objectClass>
+         </visibility>
+      </objectContribution>
+      <objectContribution
+            adaptable="false"
+            id="org.rssowl.ui.ReloadContribution"
+            objectClass="java.lang.Object">
+         <action
+               class="org.rssowl.ui.internal.actions.ReloadTypesAction"
+               definitionId="org.rssowl.ui.actions.Reload"
+               icon="icons/elcl16/reload.gif"
+               id="org.rssowl.ui.actions.Reload"
+               label="&amp;Update"
+               menubarPath="edit">
+         </action>
+         <visibility>
+            <or>
+               <objectClass name="org.rssowl.core.persist.IBookMark"/>
+               <objectClass
+                     name="org.rssowl.core.persist.IFolder">
+               </objectClass>
+               <objectClass
+                     name="org.rssowl.core.persist.INews">
+               </objectClass>
+               <objectState
+                     name="entity.group.category"
+                     value="org.rssowl.ui.internal.editors.feed.NewsGrouping">
+               </objectState>
+               <objectState
+                     name="entity.group.category"
+                     value="org.rssowl.ui.internal.views.explorer.BookMarkGrouping">
+               </objectState>
+            </or>
+         </visibility>
+      </objectContribution>
+      <objectContribution
+            adaptable="false"
+            id="org.rssowl.ui.SendLinkContribution"
+            objectClass="java.lang.Object">
+         <action
+               class="org.rssowl.ui.internal.actions.SendLinkAction"
+               definitionId="org.rssowl.ui.SendLinkAction"
+               id="org.rssowl.ui.SendLinkAction"
+               label="Send Link"
+               menubarPath="copy"
+               style="push">
+         </action>
+         <visibility>
+            <or>
+               <objectClass
+                     name="org.rssowl.core.persist.IBookMark">
+               </objectClass>
+               <objectClass
+                     name="org.rssowl.core.persist.INews">
+               </objectClass>
+            </or>
+         </visibility>
+      </objectContribution>
+      <objectContribution
+            adaptable="false"
+            id="org.rssowl.ui.CopyLinkContribution"
+            objectClass="java.lang.Object">
+         <action
+               class="org.rssowl.ui.internal.actions.CopyLinkAction"
+               definitionId="org.rssowl.ui.CopyLinkAction"
+               id="org.rssowl.ui.CopyLinkAction"
+               label="Copy Link"
+               menubarPath="copy"
+               style="push">
+         </action>
+         <visibility>
+            <or>
+               <objectClass
+                     name="org.rssowl.core.persist.IBookMark">
+               </objectClass>
+               <objectClass
+                     name="org.rssowl.core.persist.INews">
+               </objectClass>
+            </or>
+         </visibility>
+      </objectContribution>
+      <objectContribution
+            adaptable="false"
+            id="org.rssowl.ui.OpenInBrowserContribution"
+            objectClass="org.rssowl.core.persist.INews">
+         <action
+               class="org.rssowl.ui.internal.actions.OpenInExternalBrowserAction"
+               definitionId="org.rssowl.ui.OpenInExternalBrowser"
+               enablesFor="+"
+               id="org.rssowl.ui.OpenInExternalBrowser"
+               label="Open in Browser"
+               menubarPath="open"
+               style="push"/>
+      </objectContribution>
+      <objectContribution
+            adaptable="false"
+            id="org.rssowl.ui.PropertiesContribution"
+            objectClass="java.lang.Object">
+         <visibility>
+            <or>
+               <objectClass name="org.rssowl.core.persist.IMark"/>
+               <objectClass
+                     name="org.rssowl.core.persist.IFolder">
+               </objectClass>
+               <objectState
+                     name="entity.group.category"
+                     value="org.rssowl.ui.internal.views.explorer.BookMarkGrouping">
+               </objectState>
+            </or>
+         </visibility>
+         <action
+               class="org.rssowl.ui.internal.actions.EntityPropertyDialogAction"
+               definitionId="org.eclipse.ui.file.properties"
+               id="org.rssowl.ui.actions.PropertiesAction"
+               label="&amp;Properties"
+               menubarPath="properties"
+               tooltip="Show Properties">
+         </action>
+      </objectContribution>
+      <objectContribution
+            adaptable="false"
+            id="org.rssowl.ui.AggregateFolderContribution"
+            objectClass="org.rssowl.core.persist.IFolder">
+         <action
+               class="org.rssowl.ui.internal.actions.AggregateFolderAction"
+               definitionId="org.rssowl.ui.AggregateFolderAction"
+               enablesFor="1"
+               id="org.rssowl.ui.AggregateFolderAction"
+               label="Aggregate Feeds"
+               menubarPath="new.ext">
+         </action>
+      </objectContribution>
+      <objectContribution
+            adaptable="false"
+            id="org.rssowl.ui.EditLabelContribution"
+            objectClass="org.rssowl.core.persist.ILabel">
+         <action
+               class="org.rssowl.ui.internal.actions.EditLabelAction"
+               enablesFor="+"
+               icon="icons/eview16/edit.png"
+               id="org.rssowl.ui.EditLabelAction"
+               label="Edit"
+               style="push">
+         </action>
+      </objectContribution>
+      <objectContribution
+            adaptable="false"
+            id="org.rssowl.ui.DeleteLabelContribution"
+            objectClass="org.rssowl.core.persist.ILabel">
+         <action
+               class="org.rssowl.ui.internal.actions.DeleteLabelAction"
+               enablesFor="+"
+               icon="icons/elcl16/remove.gif"
+               id="org.rssowl.ui.DeleteLabelAction"
+               label="Delete"
+               style="push">
+         </action>
+      </objectContribution>
+      <viewerContribution
+            id="org.rssowl.ui.AddLabelContribution"
+            targetID="org.rssowl.ui.LabelsExplorer">
+         <action
+               class="org.rssowl.ui.internal.actions.AddLabelAction"
+               icon="icons/etool16/add.gif"
+               id="org.rssowl.ui.AddLabelAction"
+               label="Add"
+               menubarPath="additions">
+         </action>
+      </viewerContribution>
+   </extension>
+   <extension
+         point="org.eclipse.ui.editors">
+      <editor
+            class="org.rssowl.ui.internal.editors.feed.FeedView"
+            default="false"
+            icon="icons/obj16/bookmark.gif"
+            id="org.rssowl.ui.FeedView"
+            matchingStrategy="org.rssowl.ui.internal.editors.feed.FeedViewMatcher"
+            name="Feed View"/>
+   </extension>
+   <extension
+         point="org.rssowl.ui.EntityPropertyPage">
+      <entityPropertyPage
+            class="org.rssowl.ui.internal.dialogs.properties.GeneralPropertyPage"
+            handlesMultipleEntities="true"
+            id="org.rssowl.ui.internal.dialogs.properties.GeneralPropertyPage"
+            name="General"
+            order="0">
+         <targetEntity
+               class="org.rssowl.core.persist.IFolder">
+         </targetEntity>
+         <targetEntity
+               class="org.rssowl.core.persist.IBookMark">
+         </targetEntity>
+         <targetEntity
+               class="org.rssowl.core.persist.INewsBin">
+         </targetEntity>
+      </entityPropertyPage>
+      <entityPropertyPage
+            class="org.rssowl.ui.internal.dialogs.properties.SearchMarkPropertyPage"
+            handlesMultipleEntities="true"
+            id="org.rssowl.ui.internal.dialogs.properties.SearchMarkPropertyPage"
+            name="General"
+            order="0">
+         <targetEntity
+               class="org.rssowl.core.persist.ISearchMark">
+         </targetEntity>
+      </entityPropertyPage>
+      <entityPropertyPage
+            class="org.rssowl.ui.internal.dialogs.properties.ReadingPropertyPage"
+            handlesMultipleEntities="true"
+            id="org.rssowl.ui.ReadingPropertyPage"
+            name="Reading"
+            order="1">
+         <targetEntity
+               class="org.rssowl.core.persist.IFolder">
+         </targetEntity>
+         <targetEntity
+               class="org.rssowl.core.persist.IBookMark">
+         </targetEntity>
+         <targetEntity
+               class="org.rssowl.core.persist.ISearchMark">
+         </targetEntity>
+         <targetEntity
+               class="org.rssowl.core.persist.INewsBin">
+         </targetEntity>
+      </entityPropertyPage>
+      <entityPropertyPage
+            class="org.rssowl.ui.internal.dialogs.properties.DisplayPropertyPage"
+            handlesMultipleEntities="true"
+            id="org.rssowl.ui.internal.dialogs.properties.DisplayPropertyPage"
+            name="Display"
+            order="2">
+         <targetEntity
+               class="org.rssowl.core.persist.IFolder">
+         </targetEntity>
+         <targetEntity
+               class="org.rssowl.core.persist.IBookMark">
+         </targetEntity>
+         <targetEntity
+               class="org.rssowl.core.persist.ISearchMark">
+         </targetEntity>
+         <targetEntity
+               class="org.rssowl.core.persist.INewsBin">
+         </targetEntity>
+      </entityPropertyPage>
+      <entityPropertyPage
+            class="org.rssowl.ui.internal.dialogs.properties.RetentionPropertyPage"
+            handlesMultipleEntities="true"
+            id="org.rssowl.ui.internal.dialogs.properties.RetentionPropertyPage"
+            name="Clean Up"
+            order="3">
+         <targetEntity
+               class="org.rssowl.core.persist.IFolder">
+         </targetEntity>
+         <targetEntity
+               class="org.rssowl.core.persist.IBookMark">
+         </targetEntity>
+      </entityPropertyPage>
+   </extension>
+   <extension
+         point="org.eclipse.ui.contexts">
+      <context
+            description="This context is reserved for navigation between Feeds and News in RSSOwl."
+            id="org.rssowl.ui.NavigationContext"
+            name="RSSOwl Navigation"
+            parentId="org.eclipse.ui.contexts.window">
+      </context>
+   </extension>
+   <extension
+         point="org.eclipse.ui.splashHandlers">
+      <splashHandler
+            class="org.rssowl.ui.internal.SplashHandler"
+            id="org.rssowl.ui.SplashHandler">
+      </splashHandler>
+      <splashHandlerProductBinding
+            productId="org.rssowl.ui.product"
+            splashId="org.rssowl.ui.SplashHandler">
+      </splashHandlerProductBinding>
+   </extension>
+   <extension
+         point="org.eclipse.ui.themes">
+      <themeElementCategory
+            id="org.rssowl.ui.ThemeCategory"
+            label="RSSOwl">
+      </themeElementCategory>
+      <fontDefinition
+            categoryId="org.rssowl.ui.ThemeCategory"
+            id="org.rssowl.ui.NewsTextFont"
+            label="News Text Font"
+            value="Verdana-regular-10">
+         <description>
+            The news text font is used to display the contents of a news.</description>
+      </fontDefinition>
+      <fontDefinition
+            categoryId="org.rssowl.ui.ThemeCategory"
+            id="org.rssowl.ui.HeadlinesFont"
+            label="Headlines Font">
+         <description>
+            The headlines font is used to display the headlines of a feed.
+         </description>
+      </fontDefinition>
+      <fontDefinition
+            categoryId="org.rssowl.ui.ThemeCategory"
+            id="org.rssowl.ui.BookmarkExplorerFont"
+            label="Bookmark Explorer Font">
+         <description>
+            The bookmark explorer font is used in the bookmark explorer to display all folders, bookmarks and saved searches.
+         </description>
+      </fontDefinition>
+      <colorDefinition
+            categoryId="org.rssowl.ui.ThemeCategory"
+            id="org.rssowl.ui.StickyBGColor"
+            label="Sticky News Background"
+            value="255,255,128">
+         <description>
+            The sticky news background color is used as background color for all sticky news including the bookmark that the news is belonging to.
+         </description>
+      </colorDefinition>
+      <fontDefinition
+            categoryId="org.rssowl.ui.ThemeCategory"
+            id="org.rssowl.ui.NotificationPopupFont"
+            label="Notification Popup Font">
+         <description>
+            The notification popup font is used in the notification when news are coming in.
+         </description>
+      </fontDefinition>
+   </extension>
+   <extension
+         point="org.eclipse.ui.elementFactories">
+      <factory
+            class="org.rssowl.ui.internal.editors.feed.FeedViewFactory"
+            id="org.rssowl.ui.FeedViewFactory">
+      </factory>
+   </extension>
+   <extension
+         point="org.rssowl.ui.KeywordFeed">
+      <keywordFeed
+            icon="icons/obj16/fav_google.gif"
+            id="org.rssowl.ui.GoogleNewsKeywordFeed"
+            name="Google News"
+            url="http://news.google.com/news?q=[:]&amp;output=rss">
+      </keywordFeed>
+      <keywordFeed
+            icon="icons/obj16/fav_technorati.gif"
+            id="org.rssowl.ui.TechnoratiKeywordFeed"
+            name="Technorati"
+            url="http://feeds.technorati.com/search/[:]">
+      </keywordFeed>
+      <keywordFeed
+            icon="icons/obj16/fav_delicious.gif"
+            id="org.rssowl.ui.DeliciousKeywordFeed"
+            name="Delicious"
+            url="http://del.icio.us/rss/tag/[:]">
+      </keywordFeed>
+      <keywordFeed
+            icon="icons/obj16/fav_live.gif"
+            id="org.rssowl.ui.LiveKeywordFeed"
+            name="Live Search"
+            url="http://search.live.com/results.aspx?q=[:]&amp;format=rss">
+      </keywordFeed>
+      <keywordFeed
+            icon="icons/obj16/fav_digg.gif"
+            id="org.rssowl.ui.DiggKeywordFeed"
+            name="Digg"
+            url="http://digg.com/rss_search?search=[:]&amp;area=all&amp;type=both&amp;section=all">
+      </keywordFeed>
+      <keywordFeed
+            icon="icons/obj16/fav_newsvine.gif"
+            id="org.rssowl.ui.NewsvineKeywordFeed"
+            name="Newsvine"
+            url="http://www.newsvine.com/_feeds/rss2/tag?id=[:]">
+      </keywordFeed>
+      <keywordFeed
+            icon="icons/obj16/fav_google.gif"
+            id="org.rssowl.ui.GoogleBlogKeywordFeed"
+            name="Google Blog"
+            url="http://blogsearch.google.com/blogsearch_feeds?q=[:]&amp;num=10&amp;output=rss">
+      </keywordFeed>
+      <keywordFeed
+            icon="icons/obj16/fav_youtube.gif"
+            id="org.rssowl.ui.YoutubeKeywordFeed"
+            name="YouTube Video"
+            url="http://www.youtube.com/rss/tag/[:].rss">
+      </keywordFeed>
+      <keywordFeed
+            icon="icons/obj16/fav_flickr.gif"
+            id="org.rssowl.ui.FlickrKeywordFeed"
+            name="Flickr Photo"
+            url="http://www.flickr.com/services/feeds/photos_public.gne?tags=[:]&amp;format=rss_200">
+      </keywordFeed>
+   </extension>
+   <extension
+         point="org.eclipse.ui.statusHandlers">
+      <statusHandler
+            class="org.rssowl.ui.internal.DefaultStatusHandler"
+            id="org.rssowl.ui.StatusHandler">
+      </statusHandler>
+      <statusHandlerProductBinding
+            handlerId="org.rssowl.ui.StatusHandler"
+            productId="org.rssowl.ui.product">
+      </statusHandlerProductBinding>
+   </extension>
+   <extension
+         id="SecureStorage"
+         point="org.eclipse.equinox.security.secureStorage">
+      <provider
+            class="org.rssowl.ui.internal.DefaultPasswordProvider"
+            priority="8">
+      </provider>
+   </extension>
+   <extension
+         point="org.eclipse.ui.perspectiveExtensions">
+      <perspectiveExtension
+            targetID="org.rssowl.ui.perspective">
+         <view
+               closeable="true"
+               id="org.rssowl.ui.LabelsExplorer"
+               minimized="false"
+               moveable="true"
+               ratio="0.65f"
+               relationship="bottom"
+               relative="org.rssowl.ui.BookMarkExplorer"
+               showTitle="true"
+               standalone="true"
+               visible="true">
+         </view>
+      </perspectiveExtension>
+      <perspectiveExtension
+            targetID="org.eclipse.jdt.ui.JavaPerspective">
+         <view
+               id="org.rssowl.ui.StatisticsExplorer"
+               ratio="0.5"
+               relationship="bottom"
+               relative="org.eclipse.ui.views.TaskList">
+         </view>
+      </perspectiveExtension>
+   </extension>
+</plugin>
