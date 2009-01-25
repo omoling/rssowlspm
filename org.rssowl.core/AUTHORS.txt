@@ -1,0 +1,5 @@
+The following people are committers on the org.rssowl.core.model plugin, 
+listed alphabetically by last name.
+
+Ismael Juma <mlists@juma.me.uk>
+Benjamin Pasero <bpasero@rssowl.org>
