@@ -1,0 +1,4 @@
+The following people are committers on the org.rssowl.core.model plugin, 
+listed alphabetically by last name.
+
+Benjamin Pasero <bpasero@rssowl.org>
