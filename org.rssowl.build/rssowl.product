@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?pde version="3.4"?>
+
+<product name="RSSOwl" id="org.rssowl.ui.product" application="org.rssowl.ui.rssowl" useFeatures="true">
+
+   <aboutInfo>
+      <image path="/org.rssowl.ui/icons/product/about.gif"/>
+      <text>
+         RSSOwl 2.0
+
+Version: 2.0.0
+Build id: Milestone 9 (Nightly)
+
+(c) Copyright RSSOwl contributors and others 2005, 2008.  All rights reserved.
+Visit http://www.rssowl.org
+      </text>
+   </aboutInfo>
+
+   <configIni use="default">
+      <linux>/org.rssowl.ui/config.ini</linux>
+      <macosx>/org.rssowl.ui/config.ini</macosx>
+      <solaris>/org.rssowl.ui/config.ini</solaris>
+      <win32>/org.rssowl.ui/config.ini</win32>
+   </configIni>
+
+   <launcherArgs>
+      <vmArgs>-Xms15m -Xmx192m -Dosgi.requiredJavaVersion=1.5</vmArgs>
+   </launcherArgs>
+
+   <windowImages i16="/org.rssowl.ui/icons/product/16x16.gif" i32="/org.rssowl.ui/icons/product/32x32.gif" i48="/org.rssowl.ui/icons/product/48x48.gif" i64="/org.rssowl.ui/icons/product/64x64.gif" i128="/org.rssowl.ui/icons/product/128x128.gif"/>
+
+   <launcher name="RSSOwl">
+      <linux icon="/org.rssowl.ui/icons/product/rssowl.xpm"/>
+      <macosx icon="/org.rssowl.ui/icons/product/rssowl.icns"/>
+      <solaris/>
+      <win useIco="true">
+         <ico path="/org.rssowl.ui/icons/product/rssowl.ico"/>
+         <bmp/>
+      </win>
+   </launcher>
+
+   <vm>
+   </vm>
+
+   <plugins>
+      <plugin id="com.ibm.icu"/>
+      <plugin id="org.eclipse.core.commands"/>
+      <plugin id="org.eclipse.core.contenttype"/>
+      <plugin id="org.eclipse.core.expressions"/>
+      <plugin id="org.eclipse.core.jobs"/>
+      <plugin id="org.eclipse.core.runtime"/>
+      <plugin id="org.eclipse.core.runtime.compatibility"/>
+      <plugin id="org.eclipse.core.runtime.compatibility.auth"/>
+      <plugin id="org.eclipse.equinox.common"/>
+      <plugin id="org.eclipse.equinox.preferences"/>
+      <plugin id="org.eclipse.equinox.registry"/>
+      <plugin id="org.eclipse.help"/>
+      <plugin id="org.eclipse.jdt.junit.runtime"/>
+      <plugin id="org.eclipse.jface"/>
+      <plugin id="org.eclipse.jface.databinding"/>
+      <plugin id="org.eclipse.osgi"/>
+      <plugin id="org.eclipse.pde.junit.runtime"/>
+      <plugin id="org.eclipse.pde.runtime"/>
+      <plugin id="org.eclipse.rcp"/>
+      <plugin id="org.eclipse.swt"/>
+      <plugin id="org.eclipse.swt.win32.win32.x86" fragment="true"/>
+      <plugin id="org.eclipse.ui"/>
+      <plugin id="org.eclipse.ui.forms"/>
+      <plugin id="org.eclipse.ui.views"/>
+      <plugin id="org.eclipse.ui.workbench"/>
+      <plugin id="org.eclipse.update.configurator"/>
+      <plugin id="org.eclipse.update.core"/>
+      <plugin id="org.eclipse.update.scheduler"/>
+      <plugin id="org.eclipse.update.ui"/>
+      <plugin id="org.junit"/>
+      <plugin id="org.rssowl.contrib.hsqldb"/>
+      <plugin id="org.rssowl.contrib.httpclient"/>
+      <plugin id="org.rssowl.contrib.jdbc"/>
+      <plugin id="org.rssowl.core.connection"/>
+      <plugin id="org.rssowl.core.interpreter"/>
+      <plugin id="org.rssowl.core.model"/>
+      <plugin id="org.rssowl.lib.jdom"/>
+      <plugin id="org.rssowl.ui"/>
+   </plugins>
+
+   <features>
+      <feature id="org.rssowl" version="2.0.0.qualifier"/>
+      <feature id="org.eclipse.rcp" version="3.4.100.r341_v20080814-989JESIEdAciFYfkZZsBfSwQ2341"/>
+   </features>
+
+</product>
