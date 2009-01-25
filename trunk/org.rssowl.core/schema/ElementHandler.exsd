@@ -1,0 +1,128 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!-- Schema file written by PDE -->
+<schema targetNamespace="org.rssowl.core.interpreter">
+<annotation>
+      <appInfo>
+         <meta.schema plugin="org.rssowl.core.interpreter" id="ElementHandler" name="Element Handler"/>
+      </appInfo>
+      <documentation>
+         The element handler is responsible for handling a certain element in a XML document which is identified by its root element. Use this extension point if you want to override the interpretation of certain elements in existing format interpreters. Note that if you want to introduce new elements to an existing format, you should define your own namespace and use the namespace handler extension point.
+      </documentation>
+   </annotation>
+
+   <element name="extension">
+      <complexType>
+         <sequence>
+            <element ref="elementHandler" minOccurs="1" maxOccurs="unbounded"/>
+         </sequence>
+         <attribute name="point" type="string" use="required">
+            <annotation>
+               <documentation>
+                  
+               </documentation>
+            </annotation>
+         </attribute>
+         <attribute name="id" type="string">
+            <annotation>
+               <documentation>
+                  
+               </documentation>
+            </annotation>
+         </attribute>
+         <attribute name="name" type="string">
+            <annotation>
+               <documentation>
+                  
+               </documentation>
+               <appInfo>
+                  <meta.attribute translatable="true"/>
+               </appInfo>
+            </annotation>
+         </attribute>
+      </complexType>
+   </element>
+
+   <element name="elementHandler">
+      <annotation>
+         <appInfo>
+            <meta.element labelAttribute="elementName"/>
+         </appInfo>
+      </annotation>
+      <complexType>
+         <attribute name="class" type="string" use="required">
+            <annotation>
+               <documentation>
+                  
+               </documentation>
+               <appInfo>
+                  <meta.attribute kind="java" basedOn="org.rssowl.core.interpreter.IElementHandler"/>
+               </appInfo>
+            </annotation>
+         </attribute>
+         <attribute name="elementName" type="string" use="required">
+            <annotation>
+               <documentation>
+                  The name of the element this handler is responsible for. This refers to the name of the element as it appears in the XML document.
+               </documentation>
+            </annotation>
+         </attribute>
+         <attribute name="rootElement" type="string" use="required">
+            <annotation>
+               <documentation>
+                  The root element of the XML document this handler should be responsible for. This is a required field to restrict the handler to certain, known XML documents.
+               </documentation>
+            </annotation>
+         </attribute>
+      </complexType>
+   </element>
+
+   <annotation>
+      <appInfo>
+         <meta.section type="since"/>
+      </appInfo>
+      <documentation>
+         2.0
+      </documentation>
+   </annotation>
+
+   <annotation>
+      <appInfo>
+         <meta.section type="examples"/>
+      </appInfo>
+      <documentation>
+         
+      </documentation>
+   </annotation>
+
+   <annotation>
+      <appInfo>
+         <meta.section type="apiInfo"/>
+      </appInfo>
+      <documentation>
+         
+      </documentation>
+   </annotation>
+
+   <annotation>
+      <appInfo>
+         <meta.section type="implementation"/>
+      </appInfo>
+      <documentation>
+         
+      </documentation>
+   </annotation>
+
+   <annotation>
+      <appInfo>
+         <meta.section type="copyright"/>
+      </appInfo>
+      <documentation>
+         Copyright notice (c) 2005-2007 RSSOwl Development Team.                            
+All rights reserved´. This program and the accompanying 
+materials are made available under the terms of the Eclipse 
+Public License v1.0 which accompanies this distribution, and 
+is available at: &lt;a href=&quot;http://www.rssowl.org/legal/epl-v10.html&quot;&gt;http://www.rssowl.org/legal/epl-v10.html&lt;/a&gt;
+      </documentation>
+   </annotation>
+
+</schema>
