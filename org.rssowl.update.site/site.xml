@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+   <description url="http://boreal.rssowl.org">
+      The main update site of RSSOwl.
+   </description>
+   <feature url="features/org.rssowl.eclipse_2.0.0.qualifier.jar" id="org.rssowl.eclipse" version="2.0.0.qualifier">
+      <category name="RSSOwl 2.0 M5a for Eclipse"/>
+   </feature>
+   <feature url="features/org.rssowl.contrib.nntp_2.0.0.qualifier.jar" id="org.rssowl.contrib.nntp" version="2.0.0.qualifier">
+      <category name="RSSOwl Extensions"/>
+   </feature>
+   <category-def name="RSSOwl Extensions" label="RSSOwl Extensions">
+      <description>
+         This category contains compatible extensions for RSSOwl.
+      </description>
+   </category-def>
+   <category-def name="RSSOwl 2.0 M5a for Eclipse" label="RSSOwl 2.0 M5a for Eclipse">
+      <description>
+         This will install RSSOwl 2.0 preview into your Eclipse. RSSOwl 2.0 requires at least Eclipse 3.3 M6 in order to run.
+      </description>
+   </category-def>
+</site>
